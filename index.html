@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <header style="height: 50px; border: 1px solid black; width: 100%">
+        <a href="korzina.html">Корзина</a>
+    </header>
+    <main>
+        <div style="display: flex; justify-content: space-evenly; margin-top: 100px;">
+            <div data-id="1" data-name="Книга по корейскому" data-price="200" data-img="978-5-17-145629-0.jpg" class="book-item">
+                <img src="978-5-17-145629-0.jpg" alt="" style="width: 200px; height: 300px; object-fit: cover;">
+                <br>
+                <span>Книга по корейскому</span>
+                <br>
+                <span>200$</span>
+                <br>
+                <button class="korzina">
+                    добавить в корзину
+                </button>
+            </div>
+            <div data-id="2" data-name="Книга по немецкому" data-price="120" data-img="9785171146481_2.jpg" class="book-item">
+                <img src="9785171146481_2.jpg" alt="" style="width: 200px; height: 300px; object-fit: cover;">
+                <br>
+                <span>Книга по немецкому</span>
+                <br>
+                <span>120$</span>
+                <br>
+                <button class="korzina">
+                    добавить в корзину
+                </button>
+            </div>
+            <div data-id="3" data-name="Книга по японскому" data-price="150" data-img="70228423.jpg" class="book-item">
+                <img src="70228423.jpg" alt="" style="width: 200px; height: 300px; object-fit: cover;">
+                <br>
+                <span class="name">Книга по японскому</span>
+                <br>
+                <span class="price">150$</span>
+                <br>
+
+                <button class="korzina">
+                    добавить в корзину
+                </button>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>
