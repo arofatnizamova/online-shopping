@@ -7,7 +7,7 @@ $(document).ready(function() {
             name: parentItem.data('name'),
             price: parseFloat(parentItem.data('price')),
             image: parentItem.data('img'),
-            quantity: 1
+            quantity: 1,
         };
         Cart.saveProduct(item);
     });

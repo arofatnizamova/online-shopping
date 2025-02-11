@@ -18,28 +18,44 @@ const Cart = {
         return product;
     },
     showProduct() {
-        let totalProducts = 0;
-        let totalPrice = 0;
+
         var tableBody = $('.table');
         tableBody.empty();
 
 
         this.getAllProduct().forEach(item => {
-            let productTotal = item.price * item.quantity;
-            totalProducts += item.quantity;
-            totalPrice += productTotal;
+            let productTotal = item.price * parseFloat(item.quantity);
 
             tableBody.append(`
-                <tr data-number="${item.id}">
+                <tr>
                    <td>
                       <img src="${item.image}" style="width: 100px">
                    </td>
                    <td>${item.name}</td>
-                   <td>${item.quantity}</td>
-                   <td>${productTotal}</td>
-                   <td><button class="remove">remove</button></td>
+                   <td><input type="number" class="quantity" data-input-id="${item.id}" min="1" max="100" value="${item.quantity}" /></td>
+                   <td class="productPrice" data-price-id="${item.id}">${productTotal}</td>
+                   <td><button data-number="${item.id}" class="remove">remove</button></td>
                 </tr>
             `);
+        });
+    },
+    changePrice(e) {
+        let arrayProducts = JSON.parse(localStorage.getItem('product'));
+        arrayProducts.forEach(item => {
+            if (item.id === $(e.target).data("input-id")) {
+                item.quantity = e.target.value;
+                localStorage.setItem('product', JSON.stringify(arrayProducts));
+                this.showQuantityParametrs()
+            }
+        })
+    },
+    showQuantityParametrs() {
+        let totalProducts = 0;
+        let totalPrice = 0;
+        this.getAllProduct().forEach(item => {
+            let productTotal = item.price * parseFloat(item.quantity);
+            totalProducts += parseFloat(item.quantity);
+            totalPrice += productTotal;
         });
         $('.total-count').text(`${totalProducts}`)
         $('.total-price').text(`${totalPrice}`)
@@ -52,14 +68,21 @@ const Cart = {
     },
     removeProduct(e) {
         $(e.target).parentsUntil('table').empty();
-        console.log($(e.target));
-        this.getAllProduct().forEach(item => {
-            if (item.id === $(e.target).parents("tr").data("number")) {
-                // let indexToRemove = indexOf(item.id);
-                // this.getAllProduct().splice(indexToRemove, 1);
-                console.log($(e.target).parents("tr").attr("data-number"));
+        let arrayProducts = JSON.parse(localStorage.getItem('product'));
+        arrayProducts.forEach(item => {
+            if (item.id === $(e.target).data("number")) {
+                let indexToRemove = arrayProducts.indexOf(item);
+                if (indexToRemove !== -1) {
+                    let allProducts = arrayProducts;
+                    allProducts.splice(indexToRemove, 1);
+                    localStorage.setItem('product', JSON.stringify(allProducts));
+                    this.showQuantityParametrs()
+
+                }
             }
         })
+
+
     }
 }
 export { Cart };
