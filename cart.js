@@ -44,6 +44,8 @@ const Cart = {
         arrayProducts.forEach(item => {
             if (item.id === $(e.target).data("input-id")) {
                 item.quantity = e.target.value;
+                let productTotal = item.price * parseFloat(item.quantity);
+                $(`td.productPrice[data-price-id="${item.id}"]`).text(productTotal);
                 localStorage.setItem('product', JSON.stringify(arrayProducts));
                 this.showQuantityParametrs()
             }
@@ -77,12 +79,9 @@ const Cart = {
                     allProducts.splice(indexToRemove, 1);
                     localStorage.setItem('product', JSON.stringify(allProducts));
                     this.showQuantityParametrs()
-
                 }
             }
         })
-
-
     }
 }
 export { Cart };
